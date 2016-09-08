@@ -1,0 +1,57 @@
+/*
+ * Start Bootstrap - Full (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+/* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
+
+/*.full {
+    background: url(../background/123.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}*/
+body {
+	background: url(../background/1212.jpg) no-repeat center center fixed ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	/*color:#fff;*/
+  	/*background-color:#333;*/
+  	font-family: 'microsoft yahei' ,Arial,sans-serif;
+}
+
+#comic_table a:link,
+#comic_table a:visited { 
+	/*color:#D98719;*/
+	color:#ecebfe;
+}
+
+
+
+#base_name {
+    color: #fff;
+    font-weight: bold;
+}
+
+#header-base {
+	background: url(../background/111.jpg) no-repeat ;
+    background-color: #000;
+    color: #fff;
+}
+
+.text-white {
+    color: #2980b9;
+}
+#footer_base {
+	background: url(../background/1234.jpg) no-repeat ;
+    background-color: #000;
+    color: #fff;
+}

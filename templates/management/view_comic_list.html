@@ -1,0 +1,106 @@
+{% extends "management/base.html" %} {% load staticfiles %} {% block title %}查看动漫{% endblock %} {% block content %}
+<meta charset="utf-8">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 ">
+			<div class="col-md-2">
+				<div class="list-group">
+					<a href="{% url 'view_comic_list' %}" class="list-group-item" id="id_category_all">
+						全部动漫
+					</a>
+					{% for category in category_list %}
+					<a href="{% url 'view_comic_list' %}?category={{ category }}" class="list-group-item" id="id_category_{{ category }}">
+						{{ category }}
+					</a>
+					{% endfor %}
+				</div>
+				<script type="text/javascript">
+					$('#id_category_{{ query_category }}').addClass("active");
+				</script>
+			</div>
+			<div class="col-md-9 col-md-offset-1">
+				<div class="col-md-4 col-md-offset-8">
+
+					<form role="form" method="post" name="search_form" class="navbar-form">
+
+						{% csrf_token %}
+						
+							<input type="search" class="form-control" name="keyword" placeholder="请输入关键字" id="id_search_input" onkeyup="key_up()" autofocus>
+							<div class="pull-right">
+							<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+								<!--<button id="search-btn" a class="btn btn-primary btn-global" tabindex="2" hidefocus="true" type="submit" alog-action="g-search-anwser">搜索</button>-->
+								</a>
+							</div>
+						
+
+					</form>
+
+				</div>
+				<script type="text/javascript">
+					function key_up() {
+						var old_value = $('#id_search_input').val();
+						setTimeout(function() {
+							var new_value = $('#id_search_input').val();
+							if(old_value == new_value) {
+								document.search_form.submit();
+							}
+						}, 1500);
+					}
+				</script>
+				<table class="table  table-bordered" id="comic_table" >
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>动漫名称</th>
+							<th>漫画家</th>
+							<th>类型</th>
+							<th>系别</th>
+							<th>出版日期</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for comic in comic_list %}
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td>
+								<a href="{% url 'detail' %}?id={{ comic.id }}">{{ comic.name }}</a>
+							</td>
+							<td>{{ comic.author }}</td>
+							<td>{{ comic.category }}</td>
+							<td>{{ comic.type }}</td>
+							<td>{{ comic.publish_date|date:"Y-m-d" }}</td>
+						</tr>
+						{% empty %}
+						<tr>
+							<td>暂无动漫</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<nav>
+					<ul class="pager">
+						{% if comic_list.has_previous %}
+						<li class="previous">
+							<a href="?typ={{ query_type }}&page={{ comic_list.previous_page_number }}">上一页</a>
+						</li>
+						{% else %}
+						<li class="previous disabled">
+							<a href="#">上一页</a>
+						</li>
+						{% endif %} 第 {{ comic_list.number }} / {{ comic_list.paginator.num_pages }}页 {% if comic_list.has_next %}
+						<li class="next">
+							<a href="?typ={{ query_type }}&page={{ comic_list.next_page_number }}">下一页</a>
+						</li>
+						{% else %}
+						<li class="next disabled">
+							<a href="#">下一页</a>
+						</li>
+						{% endif %}
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
